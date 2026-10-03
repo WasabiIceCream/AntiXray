@@ -33,8 +33,8 @@ public abstract class PalettedContainer$DataMixin<T> {
     )
     public long[] initializeChunkPacketInfo(BitStorage storage, Operation<long[]> original, FriendlyByteBuf buf) {
         // custom arguments
-        ChunkPacketInfo<BlockState> chunkPacketInfo = Arguments.PACKET_INFO.get();
-        Integer chunkSectionIndex = Arguments.CHUNK_SECTION_INDEX.get();
+        ChunkPacketInfo<BlockState> chunkPacketInfo = (Arguments.PACKET_INFO.isBound() ? Arguments.PACKET_INFO.get() : null);
+        Integer chunkSectionIndex = (Arguments.CHUNK_SECTION_INDEX.isBound() ? Arguments.CHUNK_SECTION_INDEX.get() : null);
 
         if (chunkPacketInfo != null) {
             chunkPacketInfo.setBits(chunkSectionIndex, storage.getBits());

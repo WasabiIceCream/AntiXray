@@ -70,7 +70,7 @@ public abstract class PalettedContainerMixin<T> {
     private void addPresetValuesWithEntries(Strategy<T> strategy, Configuration configuration, BitStorage bitStorage, Palette<T> palette, CallbackInfo ci) {
         antiXray$initializePresetValues();
         //noinspection unchecked
-        List<T> paletteEntries = (List<T>) Arguments.PALETTE_ENTRIES.get();
+        List<T> paletteEntries = (List<T>) (Arguments.PALETTE_ENTRIES.isBound() ? Arguments.PALETTE_ENTRIES.get() : null);
 
         if (antiXray$presetValues != null
             && paletteEntries != null
@@ -157,8 +157,8 @@ public abstract class PalettedContainerMixin<T> {
     )
     public void setPresetValues(FriendlyByteBuf friendlyByteBuf, CallbackInfo ci) {
         // custom arguments
-        ChunkPacketInfo<BlockState> chunkPacketInfo = Arguments.PACKET_INFO.get();
-        Integer chunkSectionIndex = Arguments.CHUNK_SECTION_INDEX.get();
+        ChunkPacketInfo<BlockState> chunkPacketInfo = (Arguments.PACKET_INFO.isBound() ? Arguments.PACKET_INFO.get() : null);
+        Integer chunkSectionIndex = (Arguments.CHUNK_SECTION_INDEX.isBound() ? Arguments.CHUNK_SECTION_INDEX.get() : null);
 
         if (chunkPacketInfo != null) {
             chunkPacketInfo.setPresetValues(chunkSectionIndex, (BlockState[]) this.antiXray$presetValues);
